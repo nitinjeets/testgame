@@ -13,7 +13,7 @@ $(function () {
 
   function updateStats() {
     $('#stats').html('<div class="padded"><h2>&nbsp;&nbsp;&nbsp;&nbsp;Result<span></h2>' +
-    '<div class="boxmargin"><ul><li><b>Best Casual &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</b> <span>' + toTime(get('flip_casual')) + '</span></li>' +
+    '<div class="boxmargin"><ul><li><b>Best Easy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</b> <span>' + toTime(get('flip_easy')) + '</span></li>' +
     '<li><b>Best Medium &nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</b> <span>' + toTime(get('flip_medium')) + '</span></li>' +
     '<li><b>Best Hard &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</b> <span>' + toTime(get('flip_hard')) +  '</span></li></ul></div></div>');
   };
@@ -74,7 +74,7 @@ $(function () {
     set('flip_lost', 0);
     set('flip_abandoned', 0);
     //Best times
-    set('flip_casual', '-:-');
+    set('flip_easy', '-:-');
     set('flip_medium', '-:-');
     set('flip_hard', '-:-');
     //Cards stats
@@ -101,7 +101,7 @@ $(function () {
     level = $(this).data('level');
 
     // Set game timer and difficulty   
-    if (level == 8) {difficulty = 'casual';timer *= level * 4;} else
+    if (level == 8) {difficulty = 'easy';timer *= level * 4;} else
     if (level == 18) {difficulty = 'medium';timer *= level * 5;} else
     if (level == 32) {difficulty = 'hard';timer *= level * 6;}
 
