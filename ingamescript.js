@@ -138,6 +138,7 @@ $(function () {
               if (thisCard.length > 1) {
                 thisCard.parents('.card').toggleClass('active card found').empty(); //yey
                 increase('flip_matched');
+                var s3 = document.getElementById("sound3");
                 s3.play();
 
                 // Win game
@@ -202,4 +203,4 @@ $(function () {
 
 
 
-var s3 = document.getElementById("sound3");
+
