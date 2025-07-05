@@ -4,17 +4,23 @@ $(function () {
   function get(key) {return localStorage.getItem(key);}
   function increase(el) {set(el, parseInt(get(el)) + 1);}
   function decrease(el) {set(el, parseInt(get(el)) - 1);}
-  
+
   var toTime = function (nr) {
     if (nr == '-:-') return nr;else
     {var n = ' ' + nr / 1000 + ' ';return n.substr(0, n.length - 1) + 's';}
   };
 
   function updateStats() {
-    $('#stats').html('<div class="padded"><h2>&nbsp;&nbsp;&nbsp;&nbsp;Result<span></h2>' +
-    '<div class="boxmargin"><ul><li><b>Best Easy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_casual')) + '</span></li>' +
-    '<li><b>Best Medium &nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_medium')) + '</span></li>' +
-    '<li><b>Best Hard &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_hard')) +  '</span></li></ul></div></div>');
+    $('#stats').html('<div class="padded"><h2>Figures: <span>' +
+    '<b>' + get('flip_won') + '</b><i>Won</i>' +
+    '<b>' + get('flip_lost') + '</b><i>Lost</i>' +
+    '<b>' + get('flip_abandoned') + '</b><i>Abandoned</i></span></h2>' +
+    '<ul><li><b>Best Casual:</b> <span>' + toTime(get('flip_casual')) + '</span></li>' +
+    '<li><b>Best Medium:</b> <span>' + toTime(get('flip_medium')) + '</span></li>' +
+    '<li><b>Best Hard:</b> <span>' + toTime(get('flip_hard')) + '</span></li></ul>' +
+    '<ul><li><b>Total Flips:</b> <span>' + parseInt((parseInt(get('flip_matched')) + parseInt(get('flip_wrong'))) * 2) + '</span></li>' +
+    '<li><b>Matched Flips:</b> <span>' + get('flip_matched') + '</span></li>' +
+    '<li><b>Wrong Flips:</b> <span>' + get('flip_wrong') + '</span></li></ul></div>');
   };
 
   function shuffle(array) {
@@ -29,11 +35,6 @@ $(function () {
     return array;
   };
 
-
-
-
-
-
   function startScreen(text) {
     $('#g').removeAttr('class').empty();
     $('.logo').fadeIn(250);
@@ -44,19 +45,17 @@ $(function () {
     $('.c4').text(text.substring(3, 4));
 
     // If won game
-    if (text == 'rnnp') {
+    if (text == 'nice') {
       increase('flip_won');
       decrease('flip_abandoned');
-      $('.logo .card').addClass('active');
+      s10.play();
     }
 
     // If lost game
-    else if (text == 'rffp') {
+    else if (text == 'fail') {
         increase('flip_lost');
         decrease('flip_abandoned');
-        $('.logo .card').first().addClass('active');
-        $('.logo .card').last().addClass('active');
-        
+        s9.play();
       }
 
     // Update stats
@@ -138,6 +137,7 @@ $(function () {
               if (thisCard.length > 1) {
                 thisCard.parents('.card').toggleClass('active card found').empty(); //yey
                 increase('flip_matched');
+                
 
                 // Win game
                 if (!$('#g .card').length) {
@@ -146,7 +146,7 @@ $(function () {
                     set('flip_' + difficulty, time); // increase best score
                   }
 
-                  startScreen('rnnp');
+                  startScreen('nice');
                 }
               } else
               {
@@ -165,7 +165,7 @@ $(function () {
         'animation': 'timer ' + timer + 'ms linear' }).
 
       one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function (e) {
-        startScreen('rffp'); // fail game
+        startScreen('fail'); // fail game
       });
 
       // Set keyboard (p)ause and [esc] actions
@@ -185,7 +185,7 @@ $(function () {
         }
         // Abandon game. (ESC)
         if (e.keyCode == 27) {
-          startScreen('rnnp');
+          startScreen('flip');
           // If game was paused
           if ($('#g').attr('data-paused') == 1) {
             $('#g').attr('data-paused', '0');
@@ -198,7 +198,3 @@ $(function () {
   });
 
 });
-
-
-
-
