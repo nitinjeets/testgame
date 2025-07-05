@@ -199,3 +199,7 @@ $(function () {
   });
 
 });
+
+
+
+var s3 = document.getElementById("sound3");
