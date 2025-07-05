@@ -1,4 +1,3 @@
-
 $(function () {
 
   function set(key, value) {localStorage.setItem(key, value);}
@@ -13,11 +12,10 @@ $(function () {
 
   function updateStats() {
     $('#stats').html('<div class="padded"><h2>&nbsp;&nbsp;&nbsp;&nbsp;Result<span></h2>' +
-    '<div class="boxmargin"><ul><li><b>Best Easy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</b> <span>' + toTime(get('flip_casual')) + '</span></li>' +
-    '<li><b>Best Medium &nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</b> <span>' + toTime(get('flip_medium')) + '</span></li>' +
-    '<li><b>Best Hard &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</b> <span>' + toTime(get('flip_hard')) +  '</span></li></ul></div></div>');
+    '<div class="boxmargin"><ul><li><b>Best Easy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_casual')) + '</span></li>' +
+    '<li><b>Best Medium &nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_medium')) + '</span></li>' +
+    '<li><b>Best Hard &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_hard')) +  '</span></li></ul></div></div>');
   };
-
 
   function shuffle(array) {
     var currentIndex = array.length,temporaryValue,randomIndex;
