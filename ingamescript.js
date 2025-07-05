@@ -137,8 +137,9 @@ $(function () {
 
               if (thisCard.length > 1) {
                 thisCard.parents('.card').toggleClass('active card found').empty(); //yey
-                increase('flip_matched');
                 s7.play();
+                increase('flip_matched');
+                
 
                 // Win game
                 if (!$('#g .card').length) {
