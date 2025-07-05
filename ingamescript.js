@@ -4,8 +4,6 @@ $(function () {
   function get(key) {return localStorage.getItem(key);}
   function increase(el) {set(el, parseInt(get(el)) + 1);}
   function decrease(el) {set(el, parseInt(get(el)) - 1);}
-
-  var s1 = document.getElementById("sound1");
   
   var toTime = function (nr) {
     if (nr == '-:-') return nr;else
@@ -140,7 +138,6 @@ $(function () {
               if (thisCard.length > 1) {
                 thisCard.parents('.card').toggleClass('active card found').empty(); //yey
                 increase('flip_matched');
-                s1.play();
 
                 // Win game
                 if (!$('#g .card').length) {
