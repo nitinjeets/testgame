@@ -11,16 +11,10 @@ $(function () {
   };
 
   function updateStats() {
-    $('#stats').html('<div class="padded"><h2>Figures: <span>' +
-    '<b>' + get('flip_won') + '</b><i>Won</i>' +
-    '<b>' + get('flip_lost') + '</b><i>Lost</i>' +
-    '<b>' + get('flip_abandoned') + '</b><i>Abandoned</i></span></h2>' +
-    '<ul><li><b>Best Casual:</b> <span>' + toTime(get('flip_casual')) + '</span></li>' +
-    '<li><b>Best Medium:</b> <span>' + toTime(get('flip_medium')) + '</span></li>' +
-    '<li><b>Best Hard:</b> <span>' + toTime(get('flip_hard')) + '</span></li></ul>' +
-    '<ul><li><b>Total Flips:</b> <span>' + parseInt((parseInt(get('flip_matched')) + parseInt(get('flip_wrong'))) * 2) + '</span></li>' +
-    '<li><b>Matched Flips:</b> <span>' + get('flip_matched') + '</span></li>' +
-    '<li><b>Wrong Flips:</b> <span>' + get('flip_wrong') + '</span></li></ul></div>');
+    $('#stats').html('<div class="padded"><h2>&nbsp;&nbsp;&nbsp;&nbsp;Result<span></h2>' +
+    '<div class="boxmargin"><ul><li><b>Best Easy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_casual')) + '</span></li>' +
+    '<li><b>Best Medium &nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_medium')) + '</span></li>' +
+    '<li><b>Best Hard &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;</b> <span>' + toTime(get('flip_hard')) +  '</span></li></ul></div></div>');
   };
 
   function shuffle(array) {
@@ -35,6 +29,11 @@ $(function () {
     return array;
   };
 
+
+
+
+
+
   function startScreen(text) {
     $('#g').removeAttr('class').empty();
     $('.logo').fadeIn(250);
@@ -45,17 +44,19 @@ $(function () {
     $('.c4').text(text.substring(3, 4));
 
     // If won game
-    if (text == 'nice') {
+    if (text == 'rnnp') {
       increase('flip_won');
       decrease('flip_abandoned');
-      s10.play();
+      $('.logo .card').addClass('active');
     }
 
     // If lost game
-    else if (text == 'fail') {
+    else if (text == 'rffp') {
         increase('flip_lost');
         decrease('flip_abandoned');
-        s9.play();
+        $('.logo .card').first().addClass('active');
+        $('.logo .card').last().addClass('active');
+        
       }
 
     // Update stats
@@ -137,7 +138,6 @@ $(function () {
               if (thisCard.length > 1) {
                 thisCard.parents('.card').toggleClass('active card found').empty(); //yey
                 increase('flip_matched');
-                
 
                 // Win game
                 if (!$('#g .card').length) {
@@ -146,7 +146,7 @@ $(function () {
                     set('flip_' + difficulty, time); // increase best score
                   }
 
-                  startScreen('nice');
+                  startScreen('rnnp');
                 }
               } else
               {
@@ -165,7 +165,7 @@ $(function () {
         'animation': 'timer ' + timer + 'ms linear' }).
 
       one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function (e) {
-        startScreen('fail'); // fail game
+        startScreen('rffp'); // fail game
       });
 
       // Set keyboard (p)ause and [esc] actions
@@ -185,7 +185,7 @@ $(function () {
         }
         // Abandon game. (ESC)
         if (e.keyCode == 27) {
-          startScreen('flip');
+          startScreen('rnnp');
           // If game was paused
           if ($('#g').attr('data-paused') == 1) {
             $('#g').attr('data-paused', '0');
