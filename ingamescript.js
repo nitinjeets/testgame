@@ -137,7 +137,6 @@ $(function () {
 
               if (thisCard.length > 1) {
                 thisCard.parents('.card').toggleClass('active card found').empty(); //yey
-                s7.play();
                 increase('flip_matched');
                 
 
